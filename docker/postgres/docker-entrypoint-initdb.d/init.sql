@@ -1,0 +1,1 @@
+-- Add here a custom SQL that shoulb be runed when PG start

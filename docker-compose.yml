@@ -1,0 +1,59 @@
+version: '3'
+services:
+  alfan-postgres:
+    build: docker/postgres
+    container_name: alfan-postgres
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_DB}
+    ports:
+      - 5439:5432
+    restart: unless-stopped
+    networks:
+      - alfan
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  alfan-frontend:
+    build: docker/react
+    container_name: alfan-frontend
+    hostname: alfan-frontend
+    restart: unless-stopped
+    volumes:
+    - ./alfan-frontend:/client
+    networks:
+      alfan:
+        aliases:
+          - alfan-frontend
+    ports:
+    - "4000:3000"
+    stdin_open: true
+
+  alfan-backend:
+    image: node:16
+    container_name: alfan-backend
+    hostname: alfan-backend
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - ./alfan-backend:/usr/src/app
+      - ./alfan-backend/node_modules:/usr/src/app/node_modules
+    working_dir: /usr/src/app/
+    depends_on:
+      - alfan-postgres
+    networks:
+      alfan:
+        aliases:
+          - alfan-backend
+    ports:
+      - "4001:3000"
+    stdin_open: true
+
+volumes:
+  db_data:
+  alfan-frontend:
+  alfan-backend:
+networks:
+  alfan:
