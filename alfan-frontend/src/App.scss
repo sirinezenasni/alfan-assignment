@@ -1,0 +1,77 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+#root {
+  height: 100vh;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+li, ul {
+  list-style: none;
+}
+
+input, button, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* colors */
+$color-main: #fe0000;
+$color-border: #e2e3e6;
+$color-shadow: #ddddddaa;
+
+$border-radius-main: 12px;
+
+/* responsiveness */
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-infinite: 10000px;
+
+@mixin breakpoint($min, $max) {
+    @media only screen and (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}
+
+@mixin mobileBreakpoint {
+    @include breakpoint($breakpoint-xs, $breakpoint-sm) {
+        @content;
+    }
+}
+
+@mixin tabletBreakpoint {
+    @include breakpoint($breakpoint-sm, $breakpoint-lg) {
+        @content;
+    }
+}
+
+@mixin desktopBreakpoint {
+    @include breakpoint($breakpoint-lg, $breakpoint-infinite) {
+        @content;
+    }
+}
+
+/* shadows */
+$shadow-small: 0px 0px 4px 0px $color-shadow;
+$shadow-regular: 0px 0px 4px 2px $color-shadow;
+$shadow-big: 0px 0px 4px 5px $color-shadow;

@@ -1,0 +1,54 @@
+@import "../../App.scss";
+
+.footer {
+    color: white;
+    position: relative;
+    background-color: $color-main;
+
+    .footer__main-container {
+        padding: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+
+        @include mobileBreakpoint {
+            display: block;
+            text-align: center;
+        }
+
+        @include tabletBreakpoint {
+            display: block;
+            text-align: center;
+        }
+
+        .footer__links-container {
+            flex-basis: 66%;
+            display: flex;
+            flex-wrap: wrap;
+
+            .footer__link-item {
+                flex-basis: 33%;
+
+                a {
+                    margin-right: 0.2rem;
+                }
+
+                @include mobileBreakpoint {
+                    flex-basis: 100%;
+                }
+            }
+        }
+    }
+
+    .footer__separator {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .footer__rights {
+        font-size: 12px;
+        vertical-align: middle;
+        margin: 0 1rem;
+    }
+}

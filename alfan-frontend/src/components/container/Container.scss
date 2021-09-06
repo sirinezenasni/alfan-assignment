@@ -1,0 +1,24 @@
+@import "../../App.scss";
+
+.container {
+    @include desktopBreakpoint {
+        max-width: 1200px;
+    }
+
+    padding: 0 5rem;
+    box-sizing: border-box;
+    width: 100%;
+
+    @include mobileBreakpoint {
+        padding: 0 0.5rem;
+    }
+
+    @include tabletBreakpoint {
+        padding: 0 1rem;
+    }
+
+    @include desktopBreakpoint {
+        padding: 0 2rem;
+        margin: auto;
+    }
+}
