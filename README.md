@@ -22,6 +22,12 @@ docker exec -it alfan-backend bash
 docker exec -it alfan-frontend bash
 ```
 
+## Run
+
+Once connected to alfan-backend container, run: `npm start`
+
+Once connected to alfan-frontend container, run: `npm start`
+
 ## Access
 
 Postgres local Database: see credentials in `.env` file. Port `5439`
