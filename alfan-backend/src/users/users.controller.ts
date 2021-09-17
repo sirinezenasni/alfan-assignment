@@ -6,7 +6,7 @@ import { LoginResponseDTO } from './dto/loginResponseDTO';
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
-  @Get('login')
+  @Get('google/login')
   login(): LoginResponseDTO {
     let response = new LoginResponseDTO();
     response.redirectUrl = this.usersService.getGoogleLoginUrl();
