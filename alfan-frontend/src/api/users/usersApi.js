@@ -1,8 +1,8 @@
 import { get } from '../baseApi';
 
-export const login = async () => {
-  const res = await get('/users/login');
+export const getGoogleLoginUrl = async () => {
+  const res = await get('/users/google/login');
   return res;
 };
 
-export default login;
+export default getGoogleLoginUrl;

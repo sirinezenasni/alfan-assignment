@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { getIndex } from '../../api/index/indexApi';
-import { login } from '../../api/users/usersApi';
+import { getGoogleLoginUrl } from '../../api/users/usersApi';
 import Container from '../../components/container/Container';
 
 import './HomePage.scss';
 
 const HomePage = () => {
-  const [subTitle, setSubTitle] = useState('loading...');
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const loadIndex = async () => {
-    const res = await getIndex();
-    setSubTitle(res.title);
-  };
-
-  const clickOnLogin = async () => {
-    let loginRepsonse;
+  const clickOnYoutubeLogin = async () => {
+    setIsProcessing(true);
+    let getGoogleLoginUrlRepsonse;
     try {
-      loginRepsonse = await login();
+      getGoogleLoginUrlRepsonse = await getGoogleLoginUrl();
     } catch (e) {
+      setIsProcessing(false);
       console.log('error on login:', e);
       return;
     }
-    window.location.href = loginRepsonse.redirectUrl;
+    window.location.href = getGoogleLoginUrlRepsonse.redirectUrl;
   };
-
-  useEffect(() => {
-    loadIndex();
-  }, []);
 
   return (
     <div className="home-page">
       <Container>
-        <h1>Home Page</h1>
-        <h3>{subTitle}</h3>
-        <button type="button" onClick={clickOnLogin}>Login</button>
+        <h1>Welcome to Alfan Assignment</h1>
+        <button type="button" onClick={clickOnYoutubeLogin} disabled={isProcessing} className="home-page__youtube-login">
+          Continue with Youtube
+        </button>
       </Container>
     </div>
   );
