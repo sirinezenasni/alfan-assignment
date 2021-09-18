@@ -6,6 +6,7 @@ Alfan Assignment
 - docker: https://docs.docker.com/get-docker/
 - docker-compose: https://docs.docker.com/compose/install/
 - google api: https://console.cloud.google.com/apis
+- Make sure to enable Youtube data API v3: https://console.cloud.google.com/apis/api/youtube.googleapis.com/overview
 - create OAuth 2.0 client: https://console.cloud.google.com/apis/credentials
 - Authorised JavaScript origins: http://localhost:8001
 - Authorised redirect URIs: http://localhost:8001/oauth2callback

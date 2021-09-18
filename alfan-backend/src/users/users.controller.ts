@@ -16,9 +16,14 @@ export class UsersController {
   }
 
   @Post('google/login')
-  async googleLogin(@Body() googleLoginRequestDTO: GoogleLoginRequestDTO): Promise<GoogleLoginResponseDTO> {
-    const tokens = await this.usersService.getTokensFromCode(googleLoginRequestDTO.code);
-    console.log('tokens in controller:', tokens);
+  async googleLogin(@Body() googleLoginRequestDTO: GoogleLoginRequestDTO): Promise<any> {
+    const oauth2ClientAndToken = await this.usersService.getOAuth2ClientFromCode(googleLoginRequestDTO.code);
+    const userData = await this.usersService.getUserData(oauth2ClientAndToken);
+
+    const user = await this.usersService.getOrCreateUser(userData);
+    console.log('final user:', user);
+    //const youtubeChannels = await this.usersService.getYoutubeChannels(oauth2Client);
+    //console.log('youtubeChannels in controller:', youtubeChannels);
 
     let response = new GoogleLoginResponseDTO();
     response.jwt = '';
