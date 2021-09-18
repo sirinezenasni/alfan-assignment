@@ -32,7 +32,11 @@ docker exec -it alfan-frontend bash
 
 Copy .env.template file to .env and fill variables with your accounts data
 
-Once connected to alfan-backend container, run: `npm install`
+Once connected to alfan-backend container
+
+Install packages: `npm install`
+
+Run Database migrations: `npm run typeorm:migration:run`
 
 ### Frontend
 
