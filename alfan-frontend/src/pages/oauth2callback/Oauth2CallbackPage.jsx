@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
 
 import Container from '../../components/container/Container';
-import { googleLogin } from '../../api/users/usersApi';
+import { authGoogle } from '../../api/auth/authApi';
 
 const Oauth2CallbackPage = () => {
   const location = useLocation();
-  const { code } = queryString.parse(location.search);
 
   const googleLoginProcessing = async () => {
-    console.log('code:', code);
     try {
-      const jwt = await googleLogin(code);
+      const jwt = await authGoogle(location.search);
       console.log('jwt:', jwt);
+      // TODO: store jwt in local storage and use as bearer token
     } catch (e) {
+      // eslint-disable-next-line
       console.log('error on google login:', e);
     }
   };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { getGoogleLoginUrl } from '../../api/users/usersApi';
+import { authGoogle } from '../../api/auth/authApi';
 import Container from '../../components/container/Container';
 
 import './HomePage.scss';
@@ -10,15 +10,13 @@ const HomePage = () => {
 
   const clickOnYoutubeLogin = async () => {
     setIsProcessing(true);
-    let getGoogleLoginUrlRepsonse;
     try {
-      getGoogleLoginUrlRepsonse = await getGoogleLoginUrl();
+      await authGoogle();
     } catch (e) {
       setIsProcessing(false);
+      // eslint-disable-next-line
       console.log('error on login:', e);
-      return;
     }
-    window.location.href = getGoogleLoginUrlRepsonse.redirectUrl;
   };
 
   return (
