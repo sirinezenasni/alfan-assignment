@@ -15,7 +15,7 @@ const HomePage = () => {
   const fetchYoutubeData = async () => {
     try {
       const youtubeDataResponse = await getYoutubeData();
-      setYoutubeData(youtubeDataResponse.items[0]);
+      setYoutubeData(youtubeDataResponse);
     } catch (e) {
       // eslint-disable-next-line
       console.log('error while getting youtube data:', e);
@@ -78,12 +78,12 @@ const HomePage = () => {
 
     return (
       <YoutubeChannel
-        imageUrl={youtubeData.snippet.thumbnails.medium.url}
-        title={youtubeData.snippet.title}
-        subscriberCount={youtubeData.statistics.subscriberCount}
-        videoCount={youtubeData.statistics.videoCount}
-        viewCount={youtubeData.statistics.viewCount}
-        youtubeUrl={`https://www.youtube.com/channel/${youtubeData.id}`}
+        imageUrl={youtubeData.imageUrl}
+        title={youtubeData.title}
+        subscriberCount={youtubeData.subscriberCount}
+        videoCount={youtubeData.videoCount}
+        viewCount={youtubeData.viewCount}
+        youtubeUrl={youtubeData.youtubeUrl}
       />
     );
   };
