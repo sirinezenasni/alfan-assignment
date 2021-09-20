@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+
 import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
 import { GoogleStrategy } from './google.strategy';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtAuthStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { JwtModule } from '@nestjs/jwt';
         return {
           secret: process.env.JWT_SECRET,
           signOptions: {
-            expiresIn: 1000,
+            expiresIn: 60 * 60 * 24,
           },
         };
       },
@@ -22,6 +24,7 @@ import { JwtModule } from '@nestjs/jwt';
   providers: [
     AuthService,
     GoogleStrategy,
+    JwtAuthStrategy,
   ],
   controllers: [
     AuthController,

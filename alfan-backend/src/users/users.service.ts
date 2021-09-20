@@ -21,7 +21,7 @@ export class UsersService {
     private usersRepository: Repository<User>,
     @InjectRepository(UserCredentials)
     private userCredentialsRepository: Repository<UserCredentials>,
-  ) {}
+  ) { }
 
   async findOne(providerType: string, providerId: string): Promise<User | null> {
     const userCredentials = await this.userCredentialsRepository.findOne(<FindOneOptions>{
@@ -36,20 +36,36 @@ export class UsersService {
       return userCredentials.user;
     }
     return null;
-	}
+  }
 
-  async getYoutubeChannels(oauth2Client: Auth.OAuth2Client): Promise<any> {
+  async getUserCredentials(userId: string, providerType: string): Promise<UserCredentials> {
+    return this.userCredentialsRepository.findOne(<FindOneOptions>{
+      where: <FindConditions<UserCredentials>>{
+        type: providerType,
+        user: userId,
+      },
+    });
+  }
+
+  async getYoutubeChannels(accessToken: string): Promise<any> {
+    const oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_API_CLIENT_ID,
+      process.env.GOOGLE_API_CLIENT_SECRET,
+      process.env.GOOGLE_API_REDIRECT_URL,
+    );
+    oauth2Client.setCredentials(<Auth.Credentials>{
+      access_token: accessToken,
+    })
+
     const youtube = google.youtube(<youtube_v3.Options>{
       version: 'v3',
       auth: oauth2Client,
     });
 
     const channels = await youtube.channels.list({
-      part: ['contentDetails'],
+      part: ['snippet', 'contentDetails', 'statistics'],
       mine: true,
     });
-
-    console.log('channels:', channels.data.items);
 
     return channels.data;
   }

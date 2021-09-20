@@ -15,7 +15,6 @@ export class AuthController {
     
     const jwt = await this.authService.getJWTFromProviderUserData(providerUserData);
 
-    console.log('jwt:', jwt);
     return {
       jwt,
     };
