@@ -6,14 +6,16 @@ import { LoginResponseDTO } from './dto/LoginResponseDTO';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Get('google')
   @Header('Access-Control-Allow-Origin', '*')
   @UseGuards(AuthGuard('google'))
   async getUserFromGoogleLogin(@Req() req): Promise<LoginResponseDTO> {
     const providerUserData = <ProviderUserData>req.user;
-    const jwt = await this.authService.getJWTFromProviderUserData(providerUserData);
+    const jwt = await this.authService.getJWTFromProviderUserData(
+      providerUserData,
+    );
 
     return <LoginResponseDTO>{
       jwt,

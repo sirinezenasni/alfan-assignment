@@ -1,4 +1,11 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Column,
+  UpdateDateColumn,
+  CreateDateColumn,
+} from 'typeorm';
 import { UserCredentials } from './user.credentials.entity';
 
 @Entity({ name: 'users' })
@@ -18,6 +25,6 @@ export class User {
   @Column({ type: 'varchar', length: 255, nullable: true })
   lastName: string;
 
-  @OneToMany(() => UserCredentials, userCredentials => userCredentials.user)
+  @OneToMany(() => UserCredentials, (userCredentials) => userCredentials.user)
   credentials: UserCredentials[];
 }

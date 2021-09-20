@@ -1,4 +1,12 @@
-import { Entity, Index, ManyToOne, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Index,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Column,
+  UpdateDateColumn,
+  CreateDateColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
 @Entity({ name: 'userCredentials' })
@@ -14,7 +22,7 @@ export class UserCredentials {
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
-  @ManyToOne(() => User, user => user.credentials)
+  @ManyToOne(() => User, (user) => user.credentials)
   user: User;
 
   @Column({ type: 'varchar', length: 255 })

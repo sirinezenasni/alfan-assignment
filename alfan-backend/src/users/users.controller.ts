@@ -5,13 +5,18 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService) {}
 
   @Get('youtube')
   @UseGuards(AuthGuard('jwt'))
   async getUserYoutubeData(@Req() req): Promise<GetYoutubeDataResponseDTO> {
-    const userCredentials = await this.usersService.getUserCredentials(req.user.userId, 'google');
-    const youtubeChannels = await this.usersService.getYoutubeChannels(userCredentials.accessToken);
+    const userCredentials = await this.usersService.getUserCredentials(
+      req.user.userId,
+      'google',
+    );
+    const youtubeChannels = await this.usersService.getYoutubeChannels(
+      userCredentials.accessToken,
+    );
     const youtubeData = youtubeChannels.items[0];
 
     return <GetYoutubeDataResponseDTO>{

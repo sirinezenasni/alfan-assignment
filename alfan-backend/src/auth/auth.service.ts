@@ -5,9 +5,14 @@ import { JwtPayload } from './jwt.strategy';
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly usersService: UsersService, private jwtService: JwtService) { }
+  constructor(
+    private readonly usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
-	async getJWTFromProviderUserData(providerUserData: ProviderUserData): Promise<string> {
+  async getJWTFromProviderUserData(
+    providerUserData: ProviderUserData,
+  ): Promise<string> {
     const user = await this.usersService.getOrCreateUser(providerUserData);
 
     const jwt = this.jwtService.sign(<JwtPayload>{
@@ -16,6 +21,6 @@ export class AuthService {
       lastName: user.lastName,
     });
 
-		return jwt;
-	}
+    return jwt;
+  }
 }

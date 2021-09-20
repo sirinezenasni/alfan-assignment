@@ -1,8 +1,8 @@
 export class GetYoutubeDataResponseDTO {
   imageUrl: string;
   title: string;
-  subscriberCount: Number;
-  videoCount: Number;
-  viewCount: Number;
+  subscriberCount: number;
+  videoCount: number;
+  viewCount: number;
   youtubeUrl: string;
 }

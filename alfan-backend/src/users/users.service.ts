@@ -21,9 +21,12 @@ export class UsersService {
     private usersRepository: Repository<User>,
     @InjectRepository(UserCredentials)
     private userCredentialsRepository: Repository<UserCredentials>,
-  ) { }
+  ) {}
 
-  async getUserCredentials(userId: string, providerType: string): Promise<UserCredentials> {
+  async getUserCredentials(
+    userId: string,
+    providerType: string,
+  ): Promise<UserCredentials> {
     return this.userCredentialsRepository.findOne(<FindOneOptions>{
       where: <FindConditions<UserCredentials>>{
         type: providerType,
@@ -40,7 +43,7 @@ export class UsersService {
     );
     oauth2Client.setCredentials(<Auth.Credentials>{
       access_token: accessToken,
-    })
+    });
 
     const youtube = google.youtube(<youtube_v3.Options>{
       version: 'v3',
@@ -56,13 +59,15 @@ export class UsersService {
   }
 
   async getOrCreateUser(userData: ProviderUserData): Promise<User> {
-    const userCredentials = await this.userCredentialsRepository.findOne(<FindOneOptions>{
+    const userCredentials = await this.userCredentialsRepository.findOne(<
+      FindOneOptions
+    >{
       where: <FindConditions<UserCredentials>>{
         type: userData.providerType,
         providerId: userData.providerId,
       },
       relations: ['user'],
-    })
+    });
 
     if (userCredentials) {
       userCredentials.accessToken = userData.accessToken;
