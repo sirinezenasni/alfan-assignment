@@ -3,9 +3,17 @@
 .youtube-channel {
     display: flex;
     padding: 0.5rem;
-    background-color: #eeeeff;
-    box-shadow: $shadow-regular;
+    background-color: #f5faff;
+    box-shadow: $shadow-small;
     border-radius: 0.5rem;
+    max-width: 30rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: $shadow-regular;
+        margin-left: 1rem;
+    }
 
     .youtube-channel__image {
         width: 150px;
@@ -30,7 +38,7 @@
     }
 
     .youtube-channel__title {
-        color: #3333dd;
+        color: #1111dd;
         font-weight: bold;
     }
 
@@ -38,6 +46,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        color: #5555ff;
+        color: #1111dd;
     }
 }

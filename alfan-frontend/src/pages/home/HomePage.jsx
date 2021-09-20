@@ -83,6 +83,7 @@ const HomePage = () => {
         subscriberCount={youtubeData.statistics.subscriberCount}
         videoCount={youtubeData.statistics.videoCount}
         viewCount={youtubeData.statistics.viewCount}
+        youtubeUrl={`https://www.youtube.com/channel/${youtubeData.id}`}
       />
     );
   };

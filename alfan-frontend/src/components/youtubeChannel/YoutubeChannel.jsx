@@ -9,10 +9,11 @@ const YoutubeChannel = (props) => {
     subscriberCount,
     videoCount,
     viewCount,
+    youtubeUrl,
   } = props;
 
   return (
-    <div className="youtube-channel">
+    <a href={youtubeUrl} target="_blank" rel="noreferrer" className="youtube-channel">
       <div className="youtube-channel__image">
         <img src={imageUrl} alt={title} />
       </div>
@@ -24,7 +25,7 @@ const YoutubeChannel = (props) => {
           <div>{viewCount} Views</div>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
