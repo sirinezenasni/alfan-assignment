@@ -1,4 +1,5 @@
 import Config from '../config/Config';
+import { getJWT } from '../storage/storageManager';
 
 const baseUrl = Config.baseApiUrl;
 
@@ -82,6 +83,7 @@ export const get = (path, params) => {
     headers: {
       'Content-Type': 'application/json',
       mode: '*cors',
+      Authorization: getJWT() ? `Bearer ${getJWT()}` : null,
     },
   }).then((res) => handleResponse(res));
 };
