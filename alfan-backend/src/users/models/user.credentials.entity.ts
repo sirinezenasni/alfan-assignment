@@ -26,6 +26,6 @@ export class UserCredentials {
   @Column({ type: 'varchar', length: 500 })
   accessToken: string;
 
-  @Column({ type: 'varchar', length: 500 })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   refreshToken: string;
 }

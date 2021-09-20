@@ -23,21 +23,6 @@ export class UsersService {
     private userCredentialsRepository: Repository<UserCredentials>,
   ) { }
 
-  async findOne(providerType: string, providerId: string): Promise<User | null> {
-    const userCredentials = await this.userCredentialsRepository.findOne(<FindOneOptions>{
-      where: <FindConditions<UserCredentials>>{
-        type: providerType,
-        providerId: providerId,
-      },
-      relations: ['user'],
-    });
-
-    if (userCredentials) {
-      return userCredentials.user;
-    }
-    return null;
-  }
-
   async getUserCredentials(userId: string, providerType: string): Promise<UserCredentials> {
     return this.userCredentialsRepository.findOne(<FindOneOptions>{
       where: <FindConditions<UserCredentials>>{
