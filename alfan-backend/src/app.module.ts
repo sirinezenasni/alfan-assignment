@@ -2,15 +2,15 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 
 import { User } from './users/models/user.entity';
 import { UserCredentials } from './users/models/user.credentials.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     UsersModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -26,7 +26,7 @@ import { UserCredentials } from './users/models/user.credentials.entity';
       }),
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
